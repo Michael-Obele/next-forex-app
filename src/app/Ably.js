@@ -1,31 +1,20 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
-
-import Ably from 'ably/promises';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useChannel } from 'ably/react';
 
 const AblyMessageComponent = () => {
   const [messages, setMessages] = useState([]);
-  const [channel, setChannel] = useState(null);
   const [inputValue, setInputValue] = useState('');
-  const [presenceData, setPresenceData] = useState([]);
 
-  const client = new Ably.Realtime(process.env.NEXT_PUBLIC_ABLY_KEY);
-
-  useEffect(() => {
-    const getChannel = async () => {
-      const newChannel = client.channels.get('my-cool-channel');
-      setChannel(newChannel);
-    };
-    getChannel();
-  }, []);
+  const { channel } = useChannel('activities');
 
   useEffect(() => {
     if (channel) {
       const messageCallback = (message) => {
-        console.log('A message was received', message.data.text);
+        console.log('A message was received', message.data);
         console.log('Everything', message);
-        setMessages((prevMessages) => [...prevMessages, message.data.text]);
+        setMessages((prevMessages) => [...prevMessages, message.data]);
       };
       channel.subscribe(messageCallback);
       return () => {
@@ -38,11 +27,12 @@ const AblyMessageComponent = () => {
     if (channel) {
       channel.publish({
         name: 'ForexType',
-        data: { text: inputValue },
+        data: inputValue,
       });
-      setInputValue('');
+      setInputValue('')
     }
   }, [channel, inputValue]);
+
 
   return (
     <>
@@ -61,6 +51,8 @@ const AblyMessageComponent = () => {
           ))}
         </ul>
       </main>
+      {/*  */}
+      
     </>
   );
 };
