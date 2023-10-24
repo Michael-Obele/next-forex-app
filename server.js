@@ -3,10 +3,17 @@ const bodyParser = require('body-parser');
 const Ably = require('ably');
 const cors = require('cors');
 
+
+const corsOptions = {
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
 const app = express();
 require('dotenv').config();
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 const client = new Ably.Rest(process.env.API_KEY);
 
