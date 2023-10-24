@@ -7,7 +7,9 @@ import TradingViewWidget from './TradingWidget';
 import { Realtime } from 'ably';
 import { AblyProvider } from 'ably/react';
 
-const client = new Realtime({ authUrl: 'http://127.0.0.1:3001/auth' });
+const client = new Realtime({ authUrl: '/api' });
+
+
 
 export default function Home() {
   return (
