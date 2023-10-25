@@ -1,29 +1,27 @@
-   ~~~ js
- 
- useEffect(() => {
-    const getChannel = async () => {
-      const newChannel = client.channels.get('rates');
-      setChannel(newChannel);
-    };
-    getChannel();
-  }, []);
+```js
+useEffect(() => {
+  const getChannel = async () => {
+    const newChannel = client.channels.get('rates');
+    setChannel(newChannel);
+  };
+  getChannel();
+}, []);
 
-    const sendMessage = useCallback(() => {
-    if (channel) {
-      channel.publish({
-        name: 'ForexType',
-        data: 'inputValue',
-      });
-    }
-  }, [channel]);
+const sendMessage = useCallback(() => {
+  if (channel) {
+    channel.publish({
+      name: 'ForexType',
+      data: 'inputValue',
+    });
+  }
+}, [channel]);
 
-//server.js 
+//server.js
 
 const express = require('express');
 const bodyParser = require('body-parser');
 const Ably = require('ably');
 const cors = require('cors');
-
 
 const corsOptions = {
   origin: '*',
@@ -56,6 +54,46 @@ app.get('/auth', (req, res) => {
   });
 });
 
-~~~
+// api/route.js
 
+import Ably from 'ably/promises';
+import { NextResponse } from 'next/server';
 
+export async function GET(request) {
+  const client = new Ably.Realtime(process.env.API_KEY, {
+    queryTime: true,
+  });
+  const tokenRequestData = await client.auth.createTokenRequest({
+    clientId: `anonymous-${Math.random().toString(36).substring(8)}`,
+  });
+  return NextResponse.json(tokenRequestData, { revalidate: 1 });
+}
+// News.js
+
+ const url =
+      'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=AAPL&apikey=G7QA7LOEUR0MNE0O';
+
+    fetch(url, {
+      headers: {
+        'User-Agent': 'request',
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.Information) {
+          console.log(data);
+          setData(offlineData);
+        }else{
+          setData(data)
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
+```

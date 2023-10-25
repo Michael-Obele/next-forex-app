@@ -1,31 +1,12 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import offlineData from './json/news';
 
 function News() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState('');
 
   useEffect(() => {
-    const url =
-      'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=AAPL&apikey=G7QA7LOEUR0MNE0O';
-
-    fetch(url, {
-      headers: {
-        'User-Agent': 'request',
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setData(data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    setData(offlineData);
   }, []);
 
   return (
@@ -40,14 +21,14 @@ function News() {
                   src={datum.banner_image}
                   alt={`From ${datum.source}`}
                 />
-                <div class='p-5 ml-8'>
+                <div class='p-5 sm:ml-8'>
                   <p class='mb-3 font-sm text-gray-700'>
                     {new Date(
                       datum.time_published.replace(
                         /(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})/,
                         '$1-$2-$3T$4:$5:$6'
                       )
-                    ).toLocaleString()}
+                    ).toString()}
                   </p>
                   <h5 class='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
                     {datum.title}
@@ -69,7 +50,7 @@ function News() {
           </>
         ))
       ) : (
-        <p>Loading...</p>
+        <p>Loading News...</p>
       )}
     </div>
   );

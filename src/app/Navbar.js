@@ -1,7 +1,9 @@
 'use client';
 import React, { useState } from 'react';
 import AblyMessageComponent from './Ably';
-import News from './News';
+import News from './News.js';
+import Btc from './Btc';
+
 export function Navbar() {
   const [selected, setSelected] = useState(0);
   const [showNav, setShowNav] = useState(false);
@@ -72,16 +74,12 @@ export function Navbar() {
         <p className={selected === 0 ? '' : 'hidden'}>
           <div class='p-4 sm:ml-64'>
             This is the content for the first item.
+            <Btc />
           </div>
         </p>
         <div className={selected === 1 ? '' : 'hidden'}>
           <div class='p-4 sm:ml-64'>
             <News />
-          </div>
-        </div>
-        <div className={selected === 2 ? '' : 'hidden'}>
-          <div class='p-4 sm:ml-64'>
-            <AblyMessageComponent />
           </div>
         </div>
       </div>

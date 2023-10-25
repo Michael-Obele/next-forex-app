@@ -29,10 +29,9 @@ const AblyMessageComponent = () => {
         name: 'ForexType',
         data: inputValue,
       });
-      setInputValue('')
+      setInputValue('');
     }
   }, [channel, inputValue]);
-
 
   return (
     <>
@@ -51,8 +50,6 @@ const AblyMessageComponent = () => {
           ))}
         </ul>
       </main>
-      {/*  */}
-      
     </>
   );
 };
