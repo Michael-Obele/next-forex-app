@@ -6,10 +6,9 @@ import Script from 'next/script';
 import TradingViewWidget from './TradingWidget';
 import { Realtime } from 'ably';
 import { AblyProvider } from 'ably/react';
+import { Navbar } from './Navbar';
 
 const client = new Realtime({ authUrl: '/api' });
-
-
 
 export default function Home() {
   return (
@@ -19,10 +18,11 @@ export default function Home() {
         crossorigin='anonymous'
       />
       <AblyProvider client={client}>
-        <div className=' h-[60vh]'>{/* <TradingViewWidget /> */}</div>
-        <h1>Forex app</h1>
-      
-        <Tabs />
+        {/* <div className=' h-[60vh]'>
+          <TradingViewWidget />
+        </div> */}
+
+        <Navbar />
       </AblyProvider>
     </>
   );
