@@ -5,12 +5,12 @@ import styles from './styles/Time.css';
 
 export default function Btc() {
   const [btc, setBtc] = useState('');
-  const ably = new Ably.Realtime(process.env.NEXT_PUBLIC_BTC_API_KEY);
+  const ably = new Ably.Realtime({ key: process.env.NEXT_PUBLIC_API_KEY });
   const chanName = '[product:ably-coindesk/bitcoin]bitcoin:usd';
   let channel = ably.channels.get(chanName);
 
   const [price, setPrice] = useState('');
-  const [number, setNumber] = useState('');
+  const [number, setNumber] = useState(4562);
 
   useEffect(() => {
     channel.subscribe(function (message) {
@@ -19,9 +19,9 @@ export default function Btc() {
     });
     //
     const priceElement = document.getElementById('price');
-    const numberElement = document.getElementById('number');
+    const numberElement = number;
     const from = priceElement.textContent ? +priceElement.textContent : 1000.12;
-    const to = numberElement.value ? +numberElement.value : 1545.65;
+    const to = numberElement ? +numberElement : 1545.65;
     const round = (num) => Math.round(num);
     const animate = ({ timing, duration, callback }) => {
       let start = performance.now();
@@ -67,7 +67,6 @@ export default function Btc() {
           {price}
         </h3>
       </div>
-      <input className='hidden' type='number' id='number' value={number} />
     </>
   );
 }

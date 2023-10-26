@@ -1,3 +1,5 @@
+## All the code that worked but doesn't work
+
 ```js
 useEffect(() => {
   const getChannel = async () => {
@@ -11,12 +13,12 @@ const sendMessage = useCallback(() => {
   if (channel) {
     channel.publish({
       name: 'ForexType',
-      data: 'inputValue',
+      data: inputValue,
     });
   }
 }, [channel]);
 
-//server.js
+//server.js ==> not ideal for production
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -54,7 +56,7 @@ app.get('/auth', (req, res) => {
   });
 });
 
-// api/route.js
+// api/route.js ==> timestamp error
 
 import Ably from 'ably/promises';
 import { NextResponse } from 'next/server';
@@ -68,32 +70,32 @@ export async function GET(request) {
   });
   return NextResponse.json(tokenRequestData, { revalidate: 1 });
 }
+
 // News.js
 
- const url =
-      'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=AAPL&apikey=G7QA7LOEUR0MNE0O';
+const url =
+  'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=AAPL&apikey=G7QA7LOEUR0MNE0O';
 
-    fetch(url, {
-      headers: {
-        'User-Agent': 'request',
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        if (data.Information) {
-          console.log(data);
-          setData(offlineData);
-        }else{
-          setData(data)
-        }
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-
+fetch(url, {
+  headers: {
+    'User-Agent': 'request',
+  },
+})
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then((data) => {
+    if (data.Information) {
+      console.log(data);
+      setData(offlineData);
+    } else {
+      setData(data);
+    }
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
 ```

@@ -5,9 +5,12 @@ import offlineData from './json/news';
 function News() {
   const [data, setData] = useState('');
 
+  let datum = 'offlineData';
+
   useEffect(() => {
+    console.log('offlineData = ', datum);
     setData(offlineData);
-  }, []);
+  }, [datum]);
 
   return (
     <div>
