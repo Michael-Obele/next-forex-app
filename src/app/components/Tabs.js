@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import AblyMessageComponent from './Ably';
-import News from './News';
+import News from '../pages/News';
 export function Tabs() {
   const [selected, setSelected] = useState(0);
   let styleActive =

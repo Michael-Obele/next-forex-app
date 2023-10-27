@@ -1,7 +1,8 @@
-// TradingViewWidget.jsx
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+// TradingViewWidget.jsx
+
+import React, { useEffect, useRef, useState } from 'react';
 
 let tvScriptLoadingPromise;
 
@@ -30,24 +31,21 @@ export default function TradingViewWidget() {
     return () => (onLoadScriptRef.current = null);
 
     function createWidget() {
-      if (
-        document.getElementById('tradingview_3cac4') &&
-        'TradingView' in window
-      ) {
+      if (document.getElementById('tradingview_c2b71')) {
         new window.TradingView.widget({
           autosize: true,
           symbol: 'COINBASE:BTCUSD',
-          interval: 'D',
+          interval: '5',
           timezone: 'Etc/UTC',
-          theme: 'light',
-          style: '1',
+          theme: 'dark',
+          style: '9',
           locale: 'en',
           enable_publishing: false,
-          backgroundColor: 'rgba(252, 229, 205, 1)',
-          allow_symbol_change: true,
+          hide_top_toolbar: true,
+          withdateranges: true,
           save_image: false,
-          details: true,
-          container_id: 'tradingview_3cac4',
+          hide_volume: true,
+          container_id: 'tradingview_c2b71',
         });
       }
     }
@@ -56,19 +54,19 @@ export default function TradingViewWidget() {
   return (
     <div
       className='tradingview-widget-container'
-      style={{ height: '100%', width: '100%' }}>
+      style={{
+        height: '100%',
+        width: '100%',
+      }}>
       <div
-        id='tradingview_3cac4'
-        style={{ height: 'calc(100% - 32px)', width: '100%' }}
+        id='tradingview_c2b71'
+        style={{
+          height: '100%',
+          width: '100%',
+          borderRadius: '0.5rem',
+        }}
+        className='rounded-lg'
       />
-      <div className='tradingview-widget-copyright'>
-        <a
-          href='https://www.tradingview.com/'
-          rel='noopener nofollow'
-          target='_blank'>
-          <span className='blue-text'>Track all markets on TradingView</span>
-        </a>
-      </div>
     </div>
   );
 }

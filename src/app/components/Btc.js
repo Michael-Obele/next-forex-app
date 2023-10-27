@@ -79,11 +79,9 @@ export default function Btc() {
 
   return (
     <>
-      <div className='w-40 h-40 bg-slate-600 text-white rounded-md text-center  justify-center  items-center flex'>
-        <h3 className='text-3xl' id='price'>
-          {price}
-        </h3>
-      </div>
+      <h3 className='text-xl sm:text-3xl' id='price'>
+        {price}
+      </h3>
     </>
   );
 }

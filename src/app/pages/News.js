@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import offlineData from './json/news';
+import offlineData from '../utils/news';
 
 function News() {
   const [data, setData] = useState('');

@@ -1,8 +1,8 @@
 'use client';
 import React, { useState } from 'react';
-import AblyMessageComponent from './Ably';
-import News from './News.js';
+import News from '../pages/News.js';
 import Btc from './Btc';
+import Dashboard from '../pages/Dashboard.js';
 
 export function Navbar() {
   const [selected, setSelected] = useState(0);
@@ -16,9 +16,9 @@ export function Navbar() {
 
   const styles = {
     navShow:
-      'fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-0 sm:translate-x-0',
+      'fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-0 md:translate-x-0',
     navHide:
-      'fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0',
+      'fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full md:translate-x-0',
     iconText_Active:
       'flex items-center p-2 bg-gray-950 text-white  rounded-lg group',
     iconFAwesome_Active: 'text-white transition duration-75',
@@ -35,9 +35,9 @@ export function Navbar() {
         aria-controls='default-sidebar'
         type='button'
         onClick={toggleNav}
-        className='inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'>
+        className='inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'>
         <span className='sr-only'>Open sidebar</span>
-        <i className='fa-solid fa-bars-staggered'></i>
+        <i className='fa-solid fa-bars-staggered text-3xl'></i>
       </button>
 
       <aside
@@ -95,7 +95,7 @@ export function Navbar() {
               <a
                 onClick={toggleNav}
                 href='#'
-                className='flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 sm:hidden group'>
+                className='flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 md:hidden group'>
                 <i className='fa-solid fa-tent-arrow-turn-left text-gray-500 transition duration-75 group-hover:text-gray-900  ' />
                 <span className='ml-3'>Close Navbar</span>
               </a>
@@ -107,14 +107,13 @@ export function Navbar() {
         onClick={() => {
           setShowNav(false);
         }}>
-        <p className={selected === 0 ? '' : 'hidden'}>
-          <div className='p-4 sm:ml-64'>
-            This is the content for the first item.
-            <Btc />
+        <div className={selected === 0 ? '' : 'hidden'}>
+          <div className='p-4 md:ml-64'>
+            <Dashboard />
           </div>
-        </p>
+        </div>
         <div className={selected === 1 ? '' : 'hidden'}>
-          <div className='p-4 sm:ml-64'>
+          <div className='p-4 md:ml-64'>
             <News />
           </div>
         </div>
