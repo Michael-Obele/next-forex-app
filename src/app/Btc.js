@@ -1,13 +1,30 @@
 'use client';
 import { useEffect, useState, useRef } from 'react';
 import Ably from 'ably';
-import styles from './styles/Time.css';
 
 export default function Btc() {
   const [btc, setBtc] = useState('');
-  const ably = new Ably.Realtime({ key: process.env.NEXT_PUBLIC_API_KEY });
+  const ablyRef = useRef(null);
+
+  if (!ablyRef.current) {
+    ablyRef.current = new Ably.Realtime({
+      key: process.env.NEXT_PUBLIC_API_KEY,
+    });
+  }
+
   const chanName = '[product:ably-coindesk/bitcoin]bitcoin:usd';
-  let channel = ably.channels.get(chanName);
+  let channel = ablyRef.current.channels.get(chanName);
+
+  useEffect(() => {
+    channel.subscribe(function (message) {
+      setBtc(message.data);
+      setNumber(message.data);
+    });
+
+    return () => {
+      channel.unsubscribe();
+    };
+  }, [channel]);
 
   const [price, setPrice] = useState('');
   const [number, setNumber] = useState(4562);

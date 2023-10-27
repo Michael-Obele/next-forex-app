@@ -12,23 +12,23 @@ export function Tabs() {
     setSelected(index);
   };
   return (
-    <div class='border-b sticky border-gray-200 '>
-      <ul class='flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 '>
-        <li onClick={() => handleClick(0)} class='mr-2'>
+    <div className='border-b sticky border-gray-200 '>
+      <ul className='flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 '>
+        <li onClick={() => handleClick(0)} className='mr-2'>
           <a href='#' className={selected === 0 ? styleActive : styleNotActive}>
-            <i class='fa-solid fa-chart-line mr-2'></i>
+            <i className='fa-solid fa-chart-line mr-2'></i>
             Update
           </a>
         </li>
-        <li onClick={() => handleClick(1)} class='mr-2'>
+        <li onClick={() => handleClick(1)} className='mr-2'>
           <a href='#' className={selected === 1 ? styleActive : styleNotActive}>
-            <i class='fa-solid fa-newspaper mr-2' />
+            <i className='fa-solid fa-newspaper mr-2' />
             News
           </a>
         </li>
-        <li onClick={() => handleClick(2)} class='mr-2'>
+        <li onClick={() => handleClick(2)} className='mr-2'>
           <a href='#' className={selected === 2 ? styleActive : styleNotActive}>
-            <i class='fa-solid fa-message mr-2'></i>
+            <i className='fa-solid fa-message mr-2'></i>
             Chat
           </a>
         </li>

@@ -5,12 +5,9 @@ import offlineData from './json/news';
 function News() {
   const [data, setData] = useState('');
 
-  let datum = 'offlineData';
-
   useEffect(() => {
-    console.log('offlineData = ', datum);
     setData(offlineData);
-  }, [datum]);
+  }, [offlineData]);
 
   return (
     <div>
@@ -18,14 +15,14 @@ function News() {
         data.feed.map((datum) => (
           <>
             <div className=''>
-              <div class='my-6 mx-auto max-w-3xl'>
+              <div className='my-6 mx-auto max-w-3xl'>
                 <img
-                  class='rounded-lg mx-auto my-3 border-8 border-slate-500 w-full max-w-2xl'
+                  className='rounded-lg mx-auto my-3 border-8 border-slate-500 w-full max-w-2xl'
                   src={datum.banner_image}
                   alt={`From ${datum.source}`}
                 />
-                <div class='p-5 sm:ml-8'>
-                  <p class='mb-3 font-sm text-gray-700'>
+                <div className='p-5 sm:ml-8'>
+                  <p className='mb-3 font-sm text-gray-700'>
                     {new Date(
                       datum.time_published.replace(
                         /(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})/,
@@ -33,20 +30,20 @@ function News() {
                       )
                     ).toString()}
                   </p>
-                  <h5 class='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
+                  <h5 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
                     {datum.title}
                   </h5>
-                  <p class='mb-3 font-normal text-gray-700 dark:text-gray-400'>
+                  <p className='mb-3 font-normal text-gray-700 dark:text-gray-400'>
                     {datum.summary}
                   </p>
                   <h2>{datum.authors.join(', ')}</h2>
                   <p>By {datum.source}</p>
                   <a
                     href={datum.url}
-                    class='inline-flex items-center mt-3 px-6 py-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>
+                    className='inline-flex items-center mt-3 px-6 py-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>
                     Read more
                   </a>
-                  <hr class='h-1 my-8 bg-gray-200 border-0 dark:bg-gray-700' />
+                  <hr className='h-1 my-8 bg-gray-200 border-0 dark:bg-gray-700' />
                 </div>
               </div>
             </div>
