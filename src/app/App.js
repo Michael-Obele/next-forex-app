@@ -25,7 +25,7 @@ export function App() {
     iconText_Inactive:
       'flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-600 dark:hover:bg-gray-700 group',
     iconFAwesome_Inactive:
-      'text-gray-500 transition duration-75 group-hover:text-gray-900',
+      'text-gray-500 transition duration-75 group-hover:text-gray-400',
   };
   return (
     <>
