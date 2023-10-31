@@ -1,44 +1,41 @@
 'use client';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import Ably from 'ably';
+import { useChannel } from 'ably/react';
 
 export default function Btc() {
-  const [btc, setBtc] = useState('');
-  const ablyRef = useRef(null);
+  const [price, setPrice] = useState(0);
+  const [rem, setRem] = useState('');
+  const [number, setNumber] = useState(34245);
 
-  if (!ablyRef.current) {
-    ablyRef.current = new Ably.Realtime({
-      key: process.env.NEXT_PUBLIC_API_KEY,
-    });
-  }
+  const [values, setValues] = useState([]);
+  const prevValueRef = useRef(0);
+
+  useEffect(() => {
+    setValues((prevValues) => [...prevValues, prevValueRef.current]);
+  }, [price]);
+
+  const calculateDifference = useCallback(() => {
+    if (values.length < 2) {
+      return 0;
+    }
+    return Math.round(price - values[values.length - 2]);
+  }, [price, values]);
 
   const chanName = '[product:ably-coindesk/bitcoin]bitcoin:usd';
-  let channel = ablyRef.current.channels.get(chanName);
+
+  const { channel } = useChannel(chanName);
 
   useEffect(() => {
     channel.subscribe(function (message) {
-      setBtc(message.data);
+      prevValueRef.current = message.data;
       setNumber(message.data);
     });
 
-    return () => {
-      channel.unsubscribe();
-    };
-  }, [channel]);
-
-  const [price, setPrice] = useState('');
-  const [number, setNumber] = useState(4562);
-
-  useEffect(() => {
-    channel.subscribe(function (message) {
-      setBtc(message.data);
-      setNumber(message.data);
-    });
     //
-    const priceElement = document.getElementById('price');
     const numberElement = number;
-    const from = priceElement.textContent ? +priceElement.textContent : 1000.12;
-    const to = numberElement ? +numberElement : 1545.65;
+    const from = price ? +price : 1000.12;
+    const to = numberElement ? +numberElement : 34145.65;
     const round = (num) => Math.round(num);
     const animate = ({ timing, duration, callback }) => {
       let start = performance.now();
@@ -60,9 +57,11 @@ export default function Btc() {
     };
 
     const callback = (from, to) => (progress) => {
+      const rem_diff = round(to - from);
       const diff = (to - from) * progress + from;
       const result = round(diff);
-      priceElement.textContent = result;
+      setPrice(result);
+      setRem(rem_diff);
     };
 
     const duration = 1000;
@@ -78,10 +77,6 @@ export default function Btc() {
   }, [price, number]);
 
   return (
-    <>
-      <h3 className='text-xl sm:text-3xl' id='price'>
-        {price}
-      </h3>
-    </>
+   price
   );
 }

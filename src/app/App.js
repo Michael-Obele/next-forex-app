@@ -1,10 +1,10 @@
 'use client';
 import React, { useState } from 'react';
-import News from '../pages/News.js';
-import Btc from './Btc';
-import Dashboard from '../pages/Dashboard.js';
+import News from './pages/News.js';
+import Btc from './components/Btc.js';
+import Dashboard from './pages/Dashboard.js';
 
-export function Navbar() {
+export function App() {
   const [selected, setSelected] = useState(0);
   const [showNav, setShowNav] = useState(false);
   const handleClick = (index) => {
@@ -23,7 +23,7 @@ export function Navbar() {
       'flex items-center p-2 bg-gray-950 text-white  rounded-lg group',
     iconFAwesome_Active: 'text-white transition duration-75',
     iconText_Inactive:
-      'flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group',
+      'flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-600 dark:hover:bg-gray-700 group',
     iconFAwesome_Inactive:
       'text-gray-500 transition duration-75 group-hover:text-gray-900',
   };
@@ -44,7 +44,7 @@ export function Navbar() {
         id='default-sidebar'
         className={showNav ? styles.navShow : styles.navHide}
         aria-label='Sidebar'>
-        <div className='h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800'>
+        <div className='h-full px-3 py-4 text-white overflow-y-auto bg-[#1A2132] dark:bg-gray-800'>
           <a href='#' className='flex items-center pl-2.5 mb-5'>
             <i className='fa-solid fa-gauge-simple-high text-2xl'></i>
             <span className='self-center ml-3 text-xl font-semibold whitespace-nowrap dark:text-white'>
@@ -108,12 +108,12 @@ export function Navbar() {
           setShowNav(false);
         }}>
         <div className={selected === 0 ? '' : 'hidden'}>
-          <div className='p-4 md:ml-64'>
+          <div className='p-4 md:ml-64 bg-[#091020]'>
             <Dashboard />
           </div>
         </div>
         <div className={selected === 1 ? '' : 'hidden'}>
-          <div className='p-4 md:ml-64'>
+          <div className='p-4 md:ml-64 bg-[#091020]'>
             <News />
           </div>
         </div>

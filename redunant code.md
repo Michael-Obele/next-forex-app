@@ -70,7 +70,11 @@ export async function GET(request) {
   });
   return NextResponse.json(tokenRequestData, { revalidate: 1 });
 }
+```
 
+## News.js
+
+```js
 // News.js
 
 const url =
@@ -98,4 +102,31 @@ fetch(url, {
   .catch((error) => {
     console.error('Error:', error);
   });
+
+// page.js
+const client = new Realtime({ authUrl: '/api' });
+
+//pub.js
+const ably = new Ably.Realtime({ key: process.env.NEXT_PUBLIC_BTC_API_KEY });
+//
+if (!ablyRef.current) {
+  ablyRef.current = new Ably.Realtime({
+    key: process.env.NEXT_PUBLIC_API_KEY,
+  });
+}
+
+// snippet from Btc.js
+let channel = client.channels.get(chanName);
 ```
+
+symbol = [
+"BTC/USDT",
+"Grow Generation",
+"SkyWater",
+"Light Crude Oil",
+"DogeCoin",
+"Stellar",
+"NeoGenomics, Inc",
+"Groupon, Inc",
+"Lyft, Inc"
+]

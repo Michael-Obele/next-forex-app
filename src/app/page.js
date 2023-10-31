@@ -3,9 +3,12 @@ import Script from 'next/script';
 import TradingViewWidget from './components/TradingWidget';
 import { Realtime } from 'ably';
 import { AblyProvider } from 'ably/react';
-import { Navbar } from './components/Navbar';
+import { App } from './App';
 
-const client = new Realtime({ authUrl: '/api' });
+const client = new Realtime({
+  key: process.env.NEXT_PUBLIC_BTC_API_KEY,
+  closeOnUnload: true,
+});
 
 export default function Home() {
   return (
@@ -15,7 +18,7 @@ export default function Home() {
         crossorigin='anonymous'
       />
       <AblyProvider client={client}>
-        <Navbar />
+        <App />
       </AblyProvider>
     </>
   );
