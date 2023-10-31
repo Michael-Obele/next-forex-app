@@ -61,23 +61,23 @@ export default function Dashboard() {
       <Pub />
       {/* Tables */}
 
-      <div class='relative overflow-x-auto'>
-        <table class='w-full text-sm text-left text-white dark:text-gray-400'>
-          <thead class='text-xs text-white uppercase dark:text-gray-400'>
+      <div className='relative overflow-x-auto'>
+        <table className='w-full text-sm text-left text-white dark:text-gray-400'>
+          <thead className='text-xs text-white uppercase dark:text-gray-400'>
             <tr>
               {['Symbol', 'Price', 'Gain'].map((item) => (
-                <th scope='col' class='px-6 py-3'>
+                <th scope='col' className='px-6 py-3'>
                   {item}
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            <tr class='bg-[#091020] text-white dark:bg-gray-800'>
-              <td scope='col' class='px-6 py-4'>
+            <tr className='bg-[#091020] text-white dark:bg-gray-800'>
+              <td scope='col' className='px-6 py-4'>
                 BTC/USDT
               </td>
-              <td scope='col' class='px-6 py-4'>
+              <td scope='col' className='px-6 py-4'>
                 <Btc />
                 <span className='mx-2 text-gray-500 text-xs'>USD</span>
               </td>
@@ -93,11 +93,11 @@ export default function Dashboard() {
               </td>
             </tr>
             {symbol.map((sym, i) => (
-              <tr class='bg-[#091020] text-white dark:bg-gray-800'>
-                <td scope='col' class='px-6 py-4'>
+              <tr className='bg-[#091020] text-white dark:bg-gray-800'>
+                <td scope='col' className='px-6 py-4'>
                   {sym}
                 </td>
-                <td scope='col' class='px-6 py-4'>
+                <td scope='col' className='px-6 py-4'>
                   {prices[i]}
                   <span className='mx-2 text-gray-500 text-xs'>USD</span>
                 </td>
