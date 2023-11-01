@@ -186,7 +186,7 @@ function Chart() {
     return () => {
       chart.remove();
     };
-  }, []);
+  }, [candlestickData]);
 
   return <div id='chat' ref={chartRef}></div>;
 }

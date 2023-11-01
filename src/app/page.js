@@ -1,6 +1,6 @@
 'use client';
 import Script from 'next/script';
-import TradingViewWidget from './components/TradingWidget';
+// import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { Realtime } from 'ably';
 import { AblyProvider } from 'ably/react';
 import { App } from './App';

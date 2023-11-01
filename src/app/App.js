@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 import News from './pages/News.js';
-import Btc from './components/Btc.js';
 import Dashboard from './pages/Dashboard.js';
 
 export function App() {

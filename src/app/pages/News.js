@@ -1,13 +1,14 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import offlineData from '../utils/news';
+import Image from 'next/image';
 
 function News() {
   const [data, setData] = useState('');
 
   useEffect(() => {
     setData(offlineData);
-  }, [offlineData]);
+  }, []);
 
   return (
     <div>
@@ -19,6 +20,8 @@ function News() {
                 className='rounded-lg mx-auto my-3 border-8 border-slate-500 w-full max-w-2xl'
                 src={datum.banner_image}
                 alt={`From ${datum.source}`}
+                width={500}
+                height={500}
               />
               <div className='p-5 sm:ml-8'>
                 <p className='mb-3 font-sm text-white'>

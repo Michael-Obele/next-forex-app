@@ -74,9 +74,7 @@ export default function Btc() {
 
     animate({ timing, duration, callback: callback(from, to) });
     //
-  }, [price, number]);
+  }, [price, number, channel]);
 
-  return (
-   price
-  );
+  return price;
 }

@@ -1,4 +1,4 @@
-## All the code that worked but doesn't work
+## All the code that worked but doesn't work (or something like that)
 
 ```js
 useEffect(() => {
@@ -119,14 +119,64 @@ if (!ablyRef.current) {
 let channel = client.channels.get(chanName);
 ```
 
+```js
 symbol = [
-"BTC/USDT",
-"Grow Generation",
-"SkyWater",
-"Light Crude Oil",
-"DogeCoin",
-"Stellar",
-"NeoGenomics, Inc",
-"Groupon, Inc",
-"Lyft, Inc"
-]
+  'BTC/USDT',
+  'Grow Generation',
+  'SkyWater',
+  'Light Crude Oil',
+  'DogeCoin',
+  'Stellar',
+  'NeoGenomics, Inc',
+  'Groupon, Inc',
+  'Lyft, Inc',
+];
+```
+
+### Server
+
+```js
+// middleware.js
+import fetch from 'node-fetch';
+import cron from 'node-cron';
+
+let dataObject = {};
+
+cron.schedule('0 6,14,22 * * *', async () => {
+  // Fetch data from the API
+  const url =
+    'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=AAPL&apikey=G7QA7LOEUR0MNE0O';
+  const response = await fetch(url);
+  const data = await response.json();
+
+  // Store the data in a JavaScript object
+  dataObject = data;
+});
+
+export function myMiddleware(req, res, next) {
+  req.dataObject = dataObject;
+  next();
+}
+
+// server.js
+import http from 'http';
+import next from 'next';
+import { myMiddleware } from './middleware.js';
+
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handle = app.getRequestHandler();
+
+app.prepare().then(() => {
+  const server = http.createServer((req, res) => {
+    myMiddleware(req, res, () => {
+      handle(req, res);
+    });
+  });
+
+  server.listen(3000, (err) => {
+    if (err) throw err;
+    console.log('> Ready on http://localhost:3000');
+  });
+});
+```
