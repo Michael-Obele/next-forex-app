@@ -1,13 +1,37 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import offlineData from '../utils/news';
-import Image from 'next/image';
 
 function News() {
   const [data, setData] = useState('');
 
   useEffect(() => {
-    setData(offlineData);
+    const url =
+      'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=AAPL&apikey=demo';
+
+    fetch(url, {
+      headers: {
+        'User-Agent': 'request',
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.Information) {
+          console.log(data);
+          setData(offlineData);
+        } else {
+          setData(data);
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        setData(offlineData);
+      });
   }, []);
 
   return (
