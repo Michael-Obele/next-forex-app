@@ -10,29 +10,17 @@ import { useChannel } from 'ably/react';
 export default function Dashboard() {
   const [data, setData] = useState(Array(9).fill({ price: '0', gain: '0' }));
 
-  const symbol = [
-    'Ethereum (ETH)',
-    'Dogecoin (DOGE)',
-    'Shiba Inu (SHIB)',
-    'Cardano (ADA)',
-    'Solana (SOL)',
-    'Polygon (MATIC)',
-    'Avalanche (AVAX)',
-    'Litecoin (LTC)',
-    'Binance Coin (BNB)',
-  ];
-
-  const image = [
-    ['/bitcoin.png'],
-    ['/ethereum.png'],
-    ['/dogecoin.png'],
-    ['/shiba.png'],
-    ['/cardano.png'],
-    ['/solana.png'],
-    ['/polygon.png'],
-    ['/avalanche.png'],
-    ['/litecoin.png'],
-    ['/binance.png'],
+  const cryptocurrencies = [
+    ['Bitcoin (BTC)', '/bitcoin.png'],
+    ['Ethereum (ETH)', '/ethereum.png'],
+    ['Dogecoin (DOGE)', '/dogecoin.png'],
+    ['Shiba Inu (SHIB)', '/shiba.png'],
+    ['Cardano (ADA)', '/cardano.png'],
+    ['Solana (SOL)', '/solana.png'],
+    ['Polygon (MATIC)', '/polygon.png'],
+    ['Avalanche (AVAX)', '/avalanche.png'],
+    ['Litecoin (LTC)', '/litecoin.png'],
+    ['Binance Coin (BNB)', '/binance.png'],
   ];
 
   const { channel } = useChannel('prices');
@@ -76,14 +64,14 @@ export default function Dashboard() {
               <td scope='col' className='flex flex-row items-center px-2 py-2'>
                 <span className=''>
                   <Image
-                    src={image[0][0]}
+                    src={cryptocurrencies[0][1]}
                     alt='BTC Logo'
                     className='justify-center items-center mx-1'
                     width={30}
                     height={30}
                   />
                 </span>
-                Bitcoin (BTC)
+                {cryptocurrencies[0][0]}
               </td>
               <td scope='col' className='px-2 py-4'>
                 <Btc />
@@ -109,14 +97,14 @@ export default function Dashboard() {
                   className='flex flex-row items-center px-2 py-2'>
                   <span className=''>
                     <Image
-                      src={image[i + 1][0]}
-                      alt={image[i + 1][0] + ' Logo'}
+                      src={cryptocurrencies[i + 1][1]}
+                      alt={cryptocurrencies[i + 1][1] + ' Logo'}
                       className='justify-center items-center mx-1'
                       width={30}
                       height={30}
                     />
                   </span>
-                  {symbol[i]}
+                  {cryptocurrencies[i + 1][0]}
                 </td>
                 <td scope='col' className='px-2 py-4'>
                   {item.price}
