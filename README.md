@@ -2,7 +2,7 @@
 
 Welcome to the Real-Time Forex App, a powerful web application built using Next.js, Ably.js, and Tailwind CSS. This app brings the world of forex trading to your fingertips with real-time currency data, dynamic charts, and a seamless user experience.
 
-![Real-Time Forex App](insert-image-url-here)
+![Real-Time Forex App](https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/002/648/830/datas/gallery.jpg)
 
 ## Features
 
